@@ -1,7 +1,7 @@
 from asyncio import start_server
-from utils.neighborhood_utils.locallyfgraphs import LocallyFGraph
-from utils.tree_search_utils.tree_search import Node
-from utils.gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
+from neighborhood_utils.locallyfgraphs import LocallyFGraph
+from tree_search_utils.tree_search import Node
+from gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
 import networkx as nx
 import tempfile
 from networkx.drawing.nx_pydot import graphviz_layout

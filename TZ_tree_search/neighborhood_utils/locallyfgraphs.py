@@ -4,8 +4,8 @@ from copy import deepcopy
 from random import choice
 import logging
 import time
-from utils.gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
-from utils.gurobi_utils.gurobi_subgraphs import all_subgraph_check_plain
+from gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
+from gurobi_utils.gurobi_subgraphs import all_subgraph_check_plain
 
 def construct_locallyf_graph(F):
     G = nx.empty_graph(1)
