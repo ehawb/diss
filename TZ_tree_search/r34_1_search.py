@@ -4,7 +4,7 @@ import logging
 
 #link_graph = nx.from_graph6_bytes(b'G@hZCc')
 #link_graph_name = 'ramsey34_1'
-link_graph = nx.cycle_graph(5)
+link_graph = nx.complete_graph(4)
 link_graph_name = 'k3'
 search_mode = 'BFS'
 pickle_freq = 250
