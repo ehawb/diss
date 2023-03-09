@@ -3,7 +3,7 @@ from networkx import info
 import networkx as nx
 import time
 import logging
-from utils.gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
+from gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
 
 available_IDs = list(range(1, 10_000_000))
 
