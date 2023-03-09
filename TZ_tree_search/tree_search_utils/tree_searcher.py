@@ -251,7 +251,7 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
                 if len(next_node.children) > 0:
                     logging.debug(f"""     ABOUT THIS NODE: {next_node}
                                                 FIRST CHILD: {next_node.children[0]}
-                                                LINK GRAPH: {nx.info(next_node.local_graph.subgraph)}""")
+                                                LINK GRAPH: {next_node.local_graph.subgraph.order()} vertices, {next_node.local_graph.subgraph.size()} edges""")
                 queue = next_node.children + queue
             next_ID += len(next_node.children)
             next_node.set_status('D')
