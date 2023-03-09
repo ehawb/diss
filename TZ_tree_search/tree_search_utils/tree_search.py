@@ -1,5 +1,4 @@
 from copy import deepcopy
-from networkx import info
 import networkx as nx
 import time
 import logging
@@ -43,7 +42,7 @@ class Node():
         node_desc = f"""
         ID: {self.ID}
         A node that has {len(self.children)} children and status {self.status}.
-        The graph's info: {info(self.local_graph.graph)}; {len(self.local_graph.finished_nodes_)}
+        The graph's order: {(self.local_graph.graph.order())}; {len(self.local_graph.finished_nodes_)}
         finished nodes: {self.local_graph.finished_nodes_}.
         """
         return node_desc

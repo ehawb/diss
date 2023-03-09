@@ -198,7 +198,7 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
     queue = []
     num_good = 0
     G = deepcopy(link_graph)
-    logging.debug(f'----------- Looking at link graph {link_graph_name} with the info {nx.info(link_graph)} ========================== ')
+    logging.debug(f'----------- Looking at link graph {link_graph_name}  ========================== ')
     starting_node = max(G.nodes) + 1
     G.add_edges_from([(n, starting_node) for n in G.nodes])
     starter = Node(LocallyFGraph(G, link_graph))
