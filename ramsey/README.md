@@ -29,19 +29,18 @@ Instead of using the README to keep track of these, we can use the [issues tab](
 **[Using the code](#using-the-code)**<br>
 
 ### Setting up the virtual environment
-For Windows, entering the commands manually seems to be the most foolproof method. I've yet to get a spec list or .yml file to work for this (despite attempts on different machines). That said, run these commands in the Anaconda Powershell console:
+I have not had success using `.yml` files to work, so I just give a list of the commands I used to install the required packages here. Packages where I used specific versions will come with those version numbers; while updated versions of packages might do the job, I haven't yet experimented with that. These instructions are current as of January 2023.
+
+The code requires Python version 3.7.
+
 ```
-conda create --name graphbot python=3.7
-conda activate graphbot
-conda install -n graphbot h5py=2.10.0
-conda install -n graphbot keras=2.3.1
-conda install -n graphbot networkx=2.4
-conda install -n graphbot matplotlib=3.2.1
-conda install -n graphbot spyder=4.1.5
+pip install keras==2.3.1
+pip install networkx==2.4
+pip install matplotlib
 pip install --upgrade tensorflow
-conda install -n graphbot tensorflow-gpu=2.1.0
-conda install -n graphbot scikit-learn
-conda install -n graphbot dill
+pip install tensorflow-gpu==2.1.0
+pip install scikit-learn
+pip install dill
 ```
 
 I've only really used Anaconda, so I don't know how this would work for anything else. I also use Spyder and don't know much about other IDEs. To run Spyder from the virtual environment, just activate the environment in the Anaconda Powershell and enter the command  ```spyder```.
@@ -125,3 +124,9 @@ p2_mcts_temp = 0
 - `interactive` There are two different choices for what to enter here.
   - `interactive = True` use the "interactive" version of the bot that lets you watch the tree search unfold (works best for a smaller number of MCTS rounds if you're curious about what's going on within the tree search)
   - `interactive = False` use the regular version of the bot. Some information about the tree search is still reported (visit counts for each node) but fewer details are seen.
+
+
+My goal was to train a reinforcement learning agent to generate Ramsey counterexamples. While I succeeded on a small scale by generating the well-known R(3, 3) counterexample of order 5, my code did not scale well to working with larger graphs. If you are curious about the details of my project, I encourage you to read my dissertation.
+
+
+## How to use the code
