@@ -1,6 +1,6 @@
 # dissertation_public
 # About this repository
-My name is Emily Hawboldt. This GitHub repository contains code to accompany my dissertation, "My Dissertation." I am a mathematician who occasionally uses programming to solve problems, so I ask readers to keep that in mind as they use my code. I make no guaranteees that the code presented here is completely polished and error-free, and I welcome feedback that more experienced programmers might like to share with me. I currently teach middle school mathematics but would like to continue working on other projects in programming and mathematics as time allows.
+My name is Emily Hawboldt. This GitHub repository contains code to accompany my dissertation, "A machine learning approach to constructing Ramsey graphs leads to the Trahtenbrot-Zykov problem." I am a mathematician who occasionally uses programming to solve problems, so I ask folks to keep that in mind as they use my code. I make no guaranteees that the code presented here is completely polished and error-free, and I welcome feedback that more experienced programmers might like to share with me. 
 
 ## Chapter 3 stuff
 
