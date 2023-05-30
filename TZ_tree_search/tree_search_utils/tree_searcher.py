@@ -55,7 +55,7 @@ def do_tree_search(link_graph, link_graph_name, search_mode, pickle_freq = 5, ma
         if status == 'TG':
             num_good +=1
         if status == 'IP':
-            next_node.expand(max_graph_order)
+            next_node.expand(max_graph_order, max_children = max_children)
             if len(next_node.children) > max_children:
                 next_node = Node(next_node.local_graph, next_node.children[:max_children], 'EC')
             num_children = len(next_node.children)
@@ -233,7 +233,7 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
         if status == 'IP':
             try:
                 time_remaining = time_limit - (time.time() - start)
-                next_node.expand(max_graph_order, time_limit = time_remaining)
+                next_node.expand(max_graph_order, max_children = max_children, time_limit = time_remaining)
             except:
                 if len(next_node.local_graph.unfinished_nodes()) == 0:
                     logging.info(f'[Y] {link_graph_name} g6 L:  {print_graph6(link_graph)} | g6 G: {print_graph6(next_node.local_graph.graph)}  || unf 0 | {int(time.time() - start)}s || explored {len(finished_nodes)} nodes')

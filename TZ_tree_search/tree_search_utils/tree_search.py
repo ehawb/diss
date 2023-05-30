@@ -78,7 +78,7 @@ class Node():
     def set_status(self, status):
         self.status = status
 
-    def expand(self, max_graph_order, resume = False, max_ID = None, time_limit = False):
+    def expand(self, max_graph_order, max_children = 1000, resume = False, max_ID = None, time_limit = False):
         logging.debug('   Expanding...')
         if resume:
             global available_IDs
@@ -95,7 +95,7 @@ class Node():
         next_vertex = get_max_degree_node(self.local_graph.graph, self.local_graph.unfinished_nodes())
         add_children = []
         logging.debug('    Getting the children...')
-        new_children = self.get_children(next_vertex, max_graph_order, time_limit)
+        new_children = self.get_children(next_vertex, max_graph_order, max_children, time_limit)
         logging.debug(f'checking {len(new_children)} children')
         for i in range(len(new_children)):
             add = True
@@ -127,7 +127,7 @@ class Node():
                 good.append(new_)
         return good
 
-    def get_children(self, node, max_graph_order, time_limit = False):
+    def get_children(self, node, max_graph_order, max_children = 1000, time_limit = False):
         # print(f'Getting children for expanding vertex: {node}')
         # print(f'Curent graph edges: \n {self.local_graph.graph.edges}')
         if time_limit:
@@ -147,20 +147,17 @@ class Node():
             num_checked = 1
             for pf in possible_finishes:
                 child_ID = available_IDs.pop(0)
-                # if num_checked%100 == 0:
-                #     print(f"{num_checked}/{len(possible_finishes)} checked so far...")
                 next_graph = deepcopy(self_copy.local_graph)
                 next_graph.apply_finish(pf)
-                # print(f' --- Adding a child with ID {child_ID} and info: {next_graph}')
-                # print(f'      The finish applied was {pf}')
                 if next_graph.graph.order() > max_graph_order:
                     next_node = Node(next_graph, children = [], status = 'TL', ID = child_ID)
                     children.append(next_node)
-                    print(f"Got a graph that's too large.")
                     continue
                 next_node = Node(next_graph, children = [], status = None, ID = child_ID)
                 children.append(next_node)
                 num_checked +=1 
+                if len(children) > max_children:
+                    return children
         # print(f'Returning {len(children)} children with IDS {[node.ID for node in children]}')
         return children
 
