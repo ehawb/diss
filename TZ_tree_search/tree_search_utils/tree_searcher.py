@@ -55,7 +55,7 @@ def do_tree_search(link_graph, link_graph_name, search_mode, pickle_freq = 5, ma
         if status == 'TG':
             num_good +=1
         if status == 'IP':
-            next_node.expand(max_graph_order)
+            next_node.expand(max_graph_order, max_children = max_children)
             if len(next_node.children) > max_children:
                 next_node = Node(next_node.local_graph, next_node.children[:max_children], 'EC')
             num_children = len(next_node.children)
@@ -198,7 +198,7 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
     queue = []
     num_good = 0
     G = deepcopy(link_graph)
-    logging.debug(f'----------- Looking at link graph {link_graph_name} with the info {nx.info(link_graph)} ========================== ')
+    logging.debug(f'----------- Looking at link graph {link_graph_name}  ========================== ')
     starting_node = max(G.nodes) + 1
     G.add_edges_from([(n, starting_node) for n in G.nodes])
     starter = Node(LocallyFGraph(G, link_graph))
@@ -233,7 +233,7 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
         if status == 'IP':
             try:
                 time_remaining = time_limit - (time.time() - start)
-                next_node.expand(max_graph_order, time_limit = time_remaining)
+                next_node.expand(max_graph_order, max_children = max_children, time_limit = time_remaining)
             except:
                 if len(next_node.local_graph.unfinished_nodes()) == 0:
                     logging.info(f'[Y] {link_graph_name} g6 L:  {print_graph6(link_graph)} | g6 G: {print_graph6(next_node.local_graph.graph)}  || unf 0 | {int(time.time() - start)}s || explored {len(finished_nodes)} nodes')
@@ -251,7 +251,7 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
                 if len(next_node.children) > 0:
                     logging.debug(f"""     ABOUT THIS NODE: {next_node}
                                                 FIRST CHILD: {next_node.children[0]}
-                                                LINK GRAPH: {nx.info(next_node.local_graph.subgraph)}""")
+                                                LINK GRAPH: {next_node.local_graph.subgraph.order()} vertices, {next_node.local_graph.subgraph.size()} edges""")
                 queue = next_node.children + queue
             next_ID += len(next_node.children)
             next_node.set_status('D')
