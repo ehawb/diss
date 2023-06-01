@@ -2,6 +2,8 @@
 # About this repository
 My name is Emily Hawboldt. This GitHub repository contains code to accompany my dissertation, "A machine learning approach to constructing Ramsey graphs leads to the Trahtenbrot-Zykov problem." I am a mathematician who occasionally uses programming to solve problems, so I ask folks to keep that in mind as they use my code. I make no guaranteees that the code presented here is completely polished and error-free, and I welcome feedback that more experienced programmers might like to share with me. 
 
+My dissertation has 7 chapters. Each chapter that uses code will require a different virtual environment that will be specified in the respective README.
+
 ## Chapter 1: Introduction
 There is no code that accompanies Chapter 1. However, I did create some of the figures using the `tikz_tools` included here. I made my `nx_to_tikz` package back in the days of NetworkX 2.8. It seems that NetworkX 3.0 actually includes such a feature now! I haven't compared theirs with mine yet, but I'm including mine here for anyone who is curious.
 
@@ -14,9 +16,10 @@ The code for this chapter is in the `ramsey` folder. There is a separate README 
 ## Chapter 4: The Trahtenbrot-Zykov Problem
 The code for this chapter is in the `TZ_tree_search` folder. There is a separate README there with instructions for how to use the code.
 
-## Chapter 5 stuff
+## Chapter 5: The undecidability of the Trahtenbrot-Zykov problem
+No code for this chapter.
 
-My goal was to train a reinforcement learning agent to generate Ramsey counterexamples. While I succeeded on a small scale by generating the well-known R(3, 3) counterexample of order 5, my code did not scale well to working with larger graphs. If you are curious about the details of my project, I encourage you to read my dissertation.
+## Chapter 6: Cayley graphs
 
 ## Setting up the virtual environment
 I have not had success using `.yml` files to work, so I just give a list of the commands I used to install the required packages here. Packages where I used specific versions will come with those version numbers; while updated versions of packages might do the job, I haven't yet experimented with that. These instructions are current as of January 2023.
