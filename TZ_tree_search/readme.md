@@ -15,7 +15,8 @@ virtualenv-clone 0.5.7
 # How to use the code
 First, I will explain what the code is.
 
-## Modules
+### `neighborhood_utils`
+Contains various modules related to the "neighborhood" (Trahtenbrot-Zykov) problem.
 ### `bhm` module
 This module has an important function `thm_one`. It checks for realizability based on a theorem of Blass, Harary, and Miller. This theorem coincides with Theorem 13 in my dissertation. A proof of the theorem is available there.
 ### `bhm_gen` module
