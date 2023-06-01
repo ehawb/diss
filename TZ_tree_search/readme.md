@@ -26,8 +26,8 @@ This module has two important functions:
 `theorem_B_test` and `theorem_BC`
 Both just take a potential link graph (NetworkX graph object) as input and return a result about whether the respective theorem of Hall rules it out as a link graph.
 Theorem B is Theorem 15 in my dissertation. Theorem BC is Theorem 16 in my dissertation. Proofs of both theorems are available there. 
-### `tree_search_utils`
-All the bones for our realization construction program are here. I'm not sure it's important to know what all of the little pieces are, so I'll just leave that out. Contact me if you have questions.
+#### `tree_search_utils`
+All the bones for our realization construction program are here. I'm not sure it's important to know what all of the little pieces are, so I'm ok treating it as a sort of black box for now. Contact me if you have questions.
 
 ## How to use the modules
 ### The non-realizable theorems
