@@ -63,6 +63,11 @@ Here is an example of how I used the code to train my agent to play the $r(3, 3;
     - `encoder_name = `k3_encoder`
     - `MCTS_rounds` is up to you! How many rounds of MCTS should the agent carry out?
     - `MCTS_temp1` and `MCTS_temp2` are the temperatures for Player 1 and Player 2 respectively. I usually kept these the same, but sometimes I made them different just to see what happened.
+    - `first_move_random` is True if you want Player1 to always select their first move randomly, false otherwise. This is helpful for getting more variety in the first move selection and helps avoid the same game being played over and over. 
+    - `num_games` is the number of self-play games that should be played.
+    - `num_workers` is the number of workers you want to carry out self play games in parallel. I used 4 workers for my hardware.
+    - `games_per_batch` is how many games a worker should play before saving data. All of this will be combined at the end, but it was just a sanity thing for me in case I decided to end self play early or something.
+- Run the module.
 - Open the `z_train` module. Define variables accordingly:
     - `exp_location` is the directory where your experience is saved.
     - `model_save_dir` is the directory where your model is saved. You could copy and paste this from the `z_init` module.
