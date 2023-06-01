@@ -13,8 +13,12 @@ virtualenv       20.17.1
 virtualenv-clone 0.5.7
 ```
 # How to use the code
-First, I will explain what the code is. I'll just identify some key modules and functions from them.
+### The non-existence theorems
+If you are interested in whether a graph might be ruled out as a potential link graph, you will want to use the `nonexist_thms.py` module on the main page. Just modify it to use the theorem you are interested in.
+### Graph realization construction via tree search
+Use the `tree_search_setup.py` module on the main page. Comments are there to help you get it set up.
 
+## A few more specifics about the code
 ### `neighborhood_utils`
 Contains various modules related to the "neighborhood" (Trahtenbrot-Zykov) problem.
 #### `bhm` module
@@ -29,8 +33,4 @@ Theorem B is Theorem 15 in my dissertation. Theorem BC is Theorem 16 in my disse
 #### `tree_search_utils`
 All the bones for our realization construction program are here. I'm not sure it's important to know what all of the little pieces are, so I'm ok treating it as a sort of black box for now. Contact me if you have questions.
 
-## How to use the modules
-### The non-realizable theorems
-If you are interested in whether a graph might be ruled out as a potential link graph, you will want to use the `nonexist_thms.py` module on the main page. Just modify it 
-### Graph realization construction via tree search
-Use the `tree_search_setup.py` module on the main page. Comments are there to help you get it set up.
+
