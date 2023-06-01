@@ -8,6 +8,9 @@ There is no code that accompanies Chapter 1. However, I did create some of the f
 ## Chapter 2: Ramsey theory
 No code for this chapter.
 
+## Chapter 3: Reinforcement learning and Ramsey graphs
+The code for this chapter is in the `ramsey` folder. There is a separate README there with instructions for how to use the code.
+
 ## Chapter 4: The Trahtenbrot-Zykov Problem
 The code for this chapter is in the `TZ_tree_search` folder. There is a separate README there with instructions for how to use the code.
 
