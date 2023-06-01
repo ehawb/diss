@@ -1,7 +1,6 @@
 """
 Module based on 'Which trees are link graphs?' by Blass, Harary, Miller
 """
-
 import networkx as nx
 from neighborhood_utils.neighborhood_counter import count_neighborhoods, graph_neighborhoods
 from itertools import chain, combinations

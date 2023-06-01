@@ -168,12 +168,12 @@ def theorem_BC(link_graph):
         if nx.is_isomorphic(nx.subgraph(link_graph, B), nx.complete_graph(k)):
             # Theorem BC might apply
             if cliques_good(link_graph, k, B):
-                print(f'Theorem BC applies to B = {B}')
+                print(f'The assumptions of Theorem BC are satisfied when B = {B}')
                 BC_applies = True
                 if not check_scriptB_BC(link_graph, scriptB, link_nbd_graphs):
                     return False
     if not BC_applies:
-        print('Theorem BC did not apply.')
+        print('The assumptions of Theorem BC were not satisfied.')
     return True
 
 def graph6_string(graph):

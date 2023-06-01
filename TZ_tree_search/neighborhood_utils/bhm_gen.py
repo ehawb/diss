@@ -4,7 +4,7 @@ Module based on a generalization of
 """
 
 import networkx as nx
-from utils.neighborhood_utils.neighborhood_counter import count_neighborhoods, graph_neighborhoods
+from neighborhood_utils.neighborhood_counter import count_neighborhoods, graph_neighborhoods
 from itertools import chain, combinations
 
 def get_nodes_with_neighborhood(graph, neighborhood):
