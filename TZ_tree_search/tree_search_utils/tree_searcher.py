@@ -1,7 +1,3 @@
-from asyncio import start_server
-from neighborhood_utils.locallyfgraphs import LocallyFGraph
-from tree_search_utils.tree_search import Node
-from gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
 import networkx as nx
 import tempfile
 from networkx.drawing.nx_pydot import graphviz_layout
@@ -9,21 +5,28 @@ import matplotlib.pyplot as plt
 import time
 import pickle
 from copy import deepcopy
-import logging
+from asyncio import start_server
+from neighborhood_utils.locallyfgraphs import LocallyFGraph
+from tree_search_utils.tree_search import Node
+from gurobi_utils.gurobi_subgraphs import basic_subgraph_check_result as subgraph_check
 
-def do_pickle(graph_name, search_mode, data, final = False):
+
+def do_pickle(graph_name, save_folder, search_mode, data, final = False):
     date_time = time.strftime('%d%b%Y_%H%M%S')
     if final:
-        savefile = f'E:/tree_search/{date_time}_{graph_name}_{search_mode}_FINAL.pickle'
+        savefile = f'{save_folder}/{date_time}_{graph_name}_{search_mode}_FINAL.pickle'
     else:
-        savefile = f'E:/tree_search/{date_time}_{graph_name}_{search_mode}.pickle'
+        savefile = f'{save_folder}/{date_time}_{graph_name}_{search_mode}.pickle'
     with open(savefile, 'wb') as handle:
         pickle.dump(data, handle)
         handle.close()
     if final:
         print(savefile)
 
-def do_tree_search(link_graph, link_graph_name, search_mode, pickle_freq = 5, max_children = 1000, max_graph_order = 25, max_nodes = 1000000):
+def do_tree_search(link_graph, link_graph_name, save_folder,
+                   search_mode, pickle_freq = 5,
+                   max_children = 1000, max_graph_order = 25, 
+                   max_nodes = 1000000):
     start = time.time()
     tree_edges = []
     num_good = 0
@@ -39,7 +42,7 @@ def do_tree_search(link_graph, link_graph_name, search_mode, pickle_freq = 5, ma
             pass
         elif len(finished_nodes)%pickle_freq == 0:
             print('Time to pickle!')
-            do_pickle(graph_name = link_graph_name,
+            do_pickle(graph_name = link_graph_name, save_folder = save_folder,
             search_mode = search_mode,
             data = (finished_nodes, tree_edges))
         print(f'===== Moving on in the queue {i}, {num_good} good finishes so far...........................')
@@ -77,7 +80,9 @@ def do_tree_search(link_graph, link_graph_name, search_mode, pickle_freq = 5, ma
         i +=1
     end = time.time()
     print(f'Took {end - start} seconds.')
-    do_pickle(graph_name = link_graph_name, search_mode = search_mode, data = (finished_nodes, tree_edges), final = True)
+    do_pickle(graph_name = link_graph_name, save_folder = save_folder,
+              search_mode = search_mode, 
+              data = (finished_nodes, tree_edges), final = True)
     return finished_nodes, tree_edges
 
 def get_max_ID(nodes):
@@ -87,7 +92,9 @@ def get_max_ID(nodes):
             max_ID = node.ID
     return max_ID
 
-def resume_tree_search(link_graph_name, data, search_mode, pickle_freq = 5, max_children = 1000, max_graph_order = 25, max_nodes = 1_000_000):
+def resume_tree_search(link_graph_name, save_folder,
+                       data, search_mode, pickle_freq = 5, 
+                       max_children = 1000, max_graph_order = 25, max_nodes = 1_000_000):
     with open(data, 'rb') as f:
         nodes, tree_edges = pickle.load(f)
     start = time.time()
@@ -108,7 +115,7 @@ def resume_tree_search(link_graph_name, data, search_mode, pickle_freq = 5, max_
             pass
         elif len(finished_nodes)%pickle_freq == 0:
             print('Time to pickle!')
-            do_pickle(graph_name = link_graph_name,
+            do_pickle(graph_name = link_graph_name, save_folder = save_folder,
             search_mode = search_mode,
             data = (finished_nodes, tree_edges))
         print(f'===== Moving on in the queue {i}, {num_good} good finishes so far...........................')
@@ -149,7 +156,9 @@ def resume_tree_search(link_graph_name, data, search_mode, pickle_freq = 5, max_
         i +=1
     end = time.time()
     print(f'Took {end - start} seconds.')
-    do_pickle(graph_name = link_graph_name, search_mode = search_mode, data = (finished_nodes, tree_edges), final = True)
+    do_pickle(graph_name = link_graph_name, save_folder = save_folder,
+              search_mode = search_mode, 
+              data = (finished_nodes, tree_edges), final = True)
     return finished_nodes, tree_edges
 
 def draw_tree(search_nodes, edges, include_isomorphism = False, with_labels = False):
@@ -190,80 +199,6 @@ def draw_tree(search_nodes, edges, include_isomorphism = False, with_labels = Fa
     node_size = node_size, with_labels = with_labels,
     edgecolors = 'black')
     plt.show()
-
-def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000, max_graph_order = 25, time_limit = 300):
-    start = time.time()
-    realizable = False
-    tree_edges = []
-    queue = []
-    num_good = 0
-    G = deepcopy(link_graph)
-    logging.debug(f'----------- Looking at link graph {link_graph_name}  ========================== ')
-    starting_node = max(G.nodes) + 1
-    G.add_edges_from([(n, starting_node) for n in G.nodes])
-    starter = Node(LocallyFGraph(G, link_graph))
-    queue.append(starter)
-    logging.debug(f'    starting with {len(queue)} nodes in the queue.')
-    finished_nodes = []
-    i=0
-    next_ID = 1
-    while len(queue) > 0:
-        logging.debug(f'      Looking at another node. {len(queue)} nodes in the queue. {time.time() - start} seconds elapsed.')
-        # print(f'===== Moving on in the queue {i}, {num_good} good finishes so far...........................')
-        # print(f'    Time elapsed: {elapsed}')
-        if time.time() - start > time_limit:
-            logging.info(f'[T] {link_graph_name}  ({time_limit} s) | g6: {print_graph6(link_graph)} || explored {len(finished_nodes)} nodes')
-            realizable = False
-            return realizable
-        next_node = queue.pop(0)
-        logging.debug(f'          Node has {len(next_node.children)} children initially.')
-        next_node.reset_children()
-        logging.debug(f'          Node has {len(next_node.children)} children now.')
-        # print(f'       Next node: {next_node}')
-        if next_node.status in ['TB', 'TL', 'CI', 'D']:
-            finished_nodes.append(next_node)
-            i+=1
-            continue
-        status = next_node.update_status(finished_nodes)
-        if status == 'TG':
-            num_good +=1
-            realizable = True
-            logging.info(f'[Y] {link_graph_name}  g6 L: {print_graph6(link_graph)}   ||   g6 G: {print_graph6(next_node.local_graph.graph)}   ||  {int(time.time() - start)}s || explored {len(finished_nodes)} nodes')
-            return realizable
-        if status == 'IP':
-            try:
-                time_remaining = time_limit - (time.time() - start)
-                next_node.expand(max_graph_order, max_children = max_children, time_limit = time_remaining)
-            except:
-                if len(next_node.local_graph.unfinished_nodes()) == 0:
-                    logging.info(f'[Y] {link_graph_name} g6 L:  {print_graph6(link_graph)} | g6 G: {print_graph6(next_node.local_graph.graph)}  || unf 0 | {int(time.time() - start)}s || explored {len(finished_nodes)} nodes')
-                    realizable = True
-                    return realizable
-            if len(next_node.children) > max_children:
-                next_node = Node(next_node.local_graph, next_node.children[:max_children], 'EC')
-            num_children = len(next_node.children)
-            if search_mode == 'BFS':
-                # new children at end of queue
-                queue = queue + next_node.children
-            elif search_mode == 'DFS':
-                # push new children to top of queue
-                logging.debug(f'   Adding {len(next_node.children)} nodes to the queue.')
-                if len(next_node.children) > 0:
-                    logging.debug(f"""     ABOUT THIS NODE: {next_node}
-                                                FIRST CHILD: {next_node.children[0]}
-                                                LINK GRAPH: {next_node.local_graph.subgraph.order()} vertices, {next_node.local_graph.subgraph.size()} edges""")
-                queue = next_node.children + queue
-            next_ID += len(next_node.children)
-            next_node.set_status('D')
-        finished_nodes.append(next_node)
-        i +=1
-    if time.time() - start > time_limit:
-        logging.info(f'[T] {link_graph_name}  ({time_limit} s) | g6: {print_graph6(link_graph)} || explored {len(finished_nodes)} nodes')
-        realizable = False
-        return realizable
-    logging.info(f'[N] {link_graph_name} || g6 L: {print_graph6(link_graph)} || {int(time.time() - start)}s || explored {len(finished_nodes)} nodes')
-    realizable = False
-    return realizable
 
 def print_graph6(graph):
     with tempfile.NamedTemporaryFile(delete=False) as f:
