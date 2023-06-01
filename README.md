@@ -3,7 +3,7 @@
 My name is Emily Hawboldt. This GitHub repository contains code to accompany my dissertation, "A machine learning approach to constructing Ramsey graphs leads to the Trahtenbrot-Zykov problem." My dissertation will be available at this webpage:
 https://ir.library.louisville.edu/math_etd/ 
 
-I am a mathematician who occasionally uses programming to solve problems, so I ask folks to keep that in mind as they use my code. I make no guaranteees that the code presented here is completely polished and error-free, and I welcome feedback that more experienced programmers might like to share with me. I code almost exclusively in Python, mostly because it's the only programming language I currently know. I sometimes strive for excellent adherence to PEP 8 (https://peps.python.org/pep-0008/), but in general my code doesn't really shine that way.
+I am a mathematician who occasionally uses programming to solve problems, so I ask folks to keep that in mind as they use my code. I make no guaranteees that the code presented here is completely polished and error-free, and I welcome feedback that more experienced programmers might like to share with me. 
 
 My dissertation has 7 chapters. Each chapter that uses code will require a different virtual environment that will be specified in the respective README. Even though not all of the chapters have code, I'm including the titles here in case they might spark interest.
 ## Chapter 1: Introduction
