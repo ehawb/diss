@@ -9,13 +9,7 @@ There is no code that accompanies Chapter 1. However, I did create some of the f
 No code for this chapter.
 
 ## Chapter 4: The Trahtenbrot-Zykov Problem
-The code for this chapter is in the `TZ_tree_search` folder.
-
-### `theorem_B` module
-This module has two important functions:
-`theorem_B_test` and `theorem_BC`
-Both just take a potential link graph (NetworkX graph object) as input and return a result about whether the respective theorem rules it out as a link graph.
-Theorem B is Theorem 15 in my dissertation. Theorem BC is Theorem 16 in my dissertation. Proofs of both theorems are available there. 
+The code for this chapter is in the `TZ_tree_search` folder. There is a separate README there with instructions for how to use the code.
 
 ## Chapter 5 stuff
 
