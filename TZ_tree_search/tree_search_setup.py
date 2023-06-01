@@ -3,12 +3,13 @@ import networkx as nx
 import logging
 from datetime import date
 
+save_folder = 'E:/tree_search'
 ### if resuming tree search, path to previous data goes here
-# resume_data = 'C:/users/emily/dissertation/code/data/my_data'
-# resume = True
+resume_data = 'E:/tree_search/01Jun2023_095907_C_5_BFS.pickle'
+resume = True
 
 ### if not resuming previous search, indicate that here
-resume = False
+#resume = False
 ### put the graph6 specification inside the ''
 #link_graph = nx.from_graph6_bytes(b'GsOiho') 
 ### or you can use a built in NetworkX class to build your graph
@@ -18,7 +19,7 @@ link_graph_name = 'C_5'
 ### choose a tree search mode, 'BFS' or 'DFS'
 search_mode = 'BFS'
 ### how many nodes of the tree do you want to explore before pickling?
-pickle_freq = 250 
+pickle_freq = 1
 ### max number of children a node can have for the search
 max_children = 1000 
 ### how large should constructions be allowed to get? 
@@ -42,6 +43,7 @@ level=logging.DEBUG)
 if not resume:
     test, edges = do_tree_search(
         link_graph = link_graph,
+        save_folder = save_folder,
         link_graph_name = link_graph_name,
         search_mode = search_mode,
         pickle_freq = pickle_freq,
@@ -52,8 +54,9 @@ if not resume:
 else:
     resume_tree_search(
         link_graph_name, 
-        resume_data, 
-        search_mode, 
+        save_folder = save_folder,
+        data = resume_data, 
+        search_mode = search_mode, 
         pickle_freq = pickle_freq, 
         max_children = 1000, 
         max_graph_order = max_graph_order, 
