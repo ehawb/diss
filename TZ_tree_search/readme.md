@@ -13,20 +13,24 @@ virtualenv       20.17.1
 virtualenv-clone 0.5.7
 ```
 # How to use the code
-First, I will explain what the code is.
+First, I will explain what the code is. I'll just identify some key modules and functions from them.
 
 ### `neighborhood_utils`
 Contains various modules related to the "neighborhood" (Trahtenbrot-Zykov) problem.
-### `bhm` module
+#### `bhm` module
 This module has an important function `thm_one`. It checks for realizability based on a theorem of Blass, Harary, and Miller. This theorem coincides with Theorem 13 in my dissertation. A proof of the theorem is available there.
-### `bhm_gen` module
+#### `bhm_gen` module
 This module has an important function `thm_one_gen`. It checks for realizability based on a generalization of Blass, Harary, and Miller's theorem. This theorem coincides with Theorem 14 in my dissertation. A proof of the theorem is available there.
-### `theorem_B` module
+#### `theorem_B` module
 This module has two important functions:
 `theorem_B_test` and `theorem_BC`
 Both just take a potential link graph (NetworkX graph object) as input and return a result about whether the respective theorem of Hall rules it out as a link graph.
 Theorem B is Theorem 15 in my dissertation. Theorem BC is Theorem 16 in my dissertation. Proofs of both theorems are available there. 
+### `tree_search_utils`
+All the bones for our realization construction program are here. I'm not sure it's important to know what all of the little pieces are, so I'll just leave that out. Contact me if you have questions.
 
 ## How to use the modules
 ### The non-realizable theorems
 If you are interested in whether a graph might be ruled out as a potential link graph, you will want to use the `nonexist_thms.py` module on the main page. Just modify it 
+### Graph realization construction via tree search
+Use the `tree_search_setup.py` module on the main page. Comments are there to help you get it set up.
