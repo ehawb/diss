@@ -46,6 +46,29 @@ pip install dill
 - To train the bot on self play data, use the `z_train` module.
 - To observe the bot playing some games, use the `bot_observations` module.
 
+#### Workflow example
+Here is an example of how I used the code to train my agent to play the $r(3, 3; 5)$ game:
+- Start with the `z_init` module. Define variables accordingly:
+    - Set the `model_save_dir` to be where you want your models saved.
+    - `graph_order = 5`
+    - `cliques_order = (3, 3)`
+    - `encoder_name = `k3_encoder`
+- Run the module. When it finishes, your new model should be available where you saved it!
+- Open the `self_play_configs` module. Define variables accordingly:
+    - `model_save_dir` is the directory where your model is saved. You could copy and paste this from the `z_init` module.
+    - `model_name` is the name of the model that should generate self-play games. This should be `initmodel_K5_3_3` from the previous step.
+    - `experience_save_dir` is the directory where your model's experience should be saved.
+     - `graph_order = 5`
+    - `clique_orders = (3, 3)`
+    - `encoder_name = `k3_encoder`
+    - `MCTS_rounds` is up to you! How many rounds of MCTS should the agent carry out?
+    - `MCTS_temp1` and `MCTS_temp2` are the temperatures for Player 1 and Player 2 respectively. I usually kept these the same, but sometimes I made them different just to see what happened.
+- Open the `z_train` module. Define variables accordingly:
+    - `exp_location` is the directory where your experience is saved.
+    - `model_save_dir` is the directory where your model is saved. You could copy and paste this from the `z_init` module.
+    - `model_save_name` is the name of the model that completed self play. This should be `initmodel_K5_3_3` from the previous step.
+
+
 ## Descriptions of some key modules
 ### Self play generator (`self_play_configs`)
 #### Instructions for use
