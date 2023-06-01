@@ -10,17 +10,13 @@
 **[Descriptions of some key modules](#descriptions-of-some-key-modules)**<br>
 
 ## Game description
-This is a 2-player version of a Ramsey game. Two players alternate coloring the edges of a complete graph red and blue. The goal is to complete a red clique of order *s* or a blue clique of order *t*. The player does not have to claim all edges of the clique in order to win; they must simply complete a clique to win.
+This is a 2-player version of the $r(k, l; n)$ game from my dissertation. 
 
 ## Goals for this project
-
-## Current work
-Right now, everything is set up for playing an *R(3, 4)* game on a *K<sub>8</sub>*. This should become more general later, but for now, here's a brief description of milestones I'd like to meet before moving on to larger graphs:
-- Achieve optimal play on *K<sub>8</sub>*, so end the game in a draw on a fairly consistent basis.
-- See how this learning transfers to playing on a *K<sub>5</sub>* with the same model. Does the model need to see examples of playing the *K<sub>5</sub>* game first, or will it be able to apply what it learned in the *K<sub>8</sub>* game fairly well, basically treating the *K<sub>5</sub>* as a game within the *K<sub>8</sub>*?
+It would be great if the bot could learn to play the $r(4, 4; 17)$ game well. My dissertation describes the challenges faced in that regard. The bot *did* learn to play the $r(3, 3; 5)$ game, and that data is included in my dissertation.
 
 ## Some ideas for improvement
-Instead of using the README to keep track of these, we can use the [issues tab](https://github.com/ehawb/ramsey_2p/issues). 
+My dissertation includes recommendations for continuing the project.
 
 ## How to use the bot
 ### Table of Contents
@@ -29,9 +25,9 @@ Instead of using the README to keep track of these, we can use the [issues tab](
 **[Using the code](#using-the-code)**<br>
 
 ### Setting up the virtual environment
-I have not had success using `.yml` files to work, so I just give a list of the commands I used to install the required packages here. Packages where I used specific versions will come with those version numbers; while updated versions of packages might do the job, I haven't yet experimented with that. These instructions are current as of January 2023.
+I have not had success using `.yml` files to work, so I just give a list of the commands I used to install the required packages here. Packages where I used specific versions will come with those version numbers; while updated versions of packages might do the job, I haven't yet experimented with that. These instructions are current as of June 2023.
 
-The code requires Python version 3.7.
+The code requires Python version 3.7.9.
 
 ```
 pip install keras==2.3.1
@@ -42,36 +38,6 @@ pip install tensorflow-gpu==2.1.0
 pip install scikit-learn
 pip install dill
 ```
-
-I've only really used Anaconda, so I don't know how this would work for anything else. I also use Spyder and don't know much about other IDEs. To run Spyder from the virtual environment, just activate the environment in the Anaconda Powershell and enter the command  ```spyder```.
-
-### Getting the bot on your computer
-First, I will describe how to clone the GitHub repository, and then I will talk about what that means.
-Note: these instructions assume Git is already installed on your machine. Make sure you have Git installed if you don't already. Here is a [link to install Git](https://git-scm.com/downloads).
-#### Cloning the repository
-- Open Windows Command Prompt
-- Change the directory to where you would like the bot to be stored on your computer (command: `cd/d <path>`)
-  - In my example below, I decided I wanted to store the bot in a folder called "Test" (Note: This example screenshot shows a different game, but the process is the same.)
-- Clone the GitHub repository into that folder using the following command: `git clone https://github.com/ehawb/pathgame.git`
-- At this point, the bot is on your machine: 
-
-![Screenshot of cloning process](https://github.com/ehawb/pathgame/blob/master/readme%20stuff%20(pics%20etc%2C%20irrelevant)/clone%20screenshot.png)
-
-- Change the directory to the `ramsey_2p` module (command: `cd/d ramsey_2p`)
-- You can see that Git is up and running by using command `git status`
-
-#### Now what?
-- You can create your own branch using the following command: `git checkout -b <branchname>`
-  - In my example below, I decided to make a branch called `emily` (though more descriptive names might be preferable, e.g. "k20_bot".
-  - Once you have your own branch, you can experiment with the code however you like without worrying about disrupting the stability of the `main` branch
-  - You can create multiple branches if this is something you're interested in
-  - To get back to the main branch (if you might want to make another new branch for an experiment), use the command `git checkout main`
-  - If you do something you'd like to share, you can push your own branch to the GitHub by using the command `git push origin <branchname>`
-  - Deleting branches, renaming branches, etc is fairly simple (commands are easily found on Google; there are also Git cheat sheets available)
-  - If you'd like to keep track of any changes you've made in your branch, you can use Git commits to keep track of those changes (Colt Steele describes this stuff pretty well in [this video](https://www.youtube.com/watch?v=USjZcfj8yxE&list=PLmWO9U5bYOKLfrSv9QUAtVQHmEHEzymu9&ab_channel=ColtSteele))
-- This is a good webpage about the GitHub workflow, which I'm still learning myself: [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-- This is a good webpage about pull requests on GitHub: [Creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) 
-  ![Screenshot of branching process](https://github.com/ehawb/pathgame/blob/master/readme%20stuff%20(pics%20etc%2C%20irrelevant)/branch%2C%20push%20screenshot.png)
   
 ### Using the code
 - The code as it is really isn't all that user friendly, so my apologies in advance...
@@ -126,7 +92,3 @@ p2_mcts_temp = 0
   - `interactive = False` use the regular version of the bot. Some information about the tree search is still reported (visit counts for each node) but fewer details are seen.
 
 
-My goal was to train a reinforcement learning agent to generate Ramsey counterexamples. While I succeeded on a small scale by generating the well-known R(3, 3) counterexample of order 5, my code did not scale well to working with larger graphs. If you are curious about the details of my project, I encourage you to read my dissertation.
-
-
-## How to use the code
