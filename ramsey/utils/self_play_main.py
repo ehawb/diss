@@ -58,7 +58,7 @@ def parallel_self_play_games(trained_model, encoder_name,
                              MCTS_rounds, MCTS_temps,
                              num_batches, games_per_batch, exp_dir, worker_ID,
                              head_start = None, first_move_random = False):
-    model = load_model(f'C:/users/emily/ramsey/ramsey_2p_rigid_rules/models/{trained_model}')
+    model = load_model(f'{trained_model}')
     encoder = Encoder.get_encoder_by_name(encoder_name, graph_order)
     board = Board(nx.complete_graph(graph_order))
     player1 = ZeroAgent(model, encoder, MCTS_rounds, MCTS_temps[0])
@@ -89,8 +89,8 @@ def parallel_self_play_games(trained_model, encoder_name,
     print(f'average number of moves per game: {total_moves/num_games}')
 
 
-def combine_files(exp_dir):
-    directory = f'C:/users/emily/ramsey/ramsey_2p_rigid_rules/experience/{exp_dir}'
+def combine_files(full_exp_dir):
+    directory = full_exp_dir
     os.mkdir(f'{directory}/combined')
     files = os.listdir(directory)
     # print(files)

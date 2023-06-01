@@ -88,9 +88,9 @@ def combine_experience(collectors):
         combined_rewards)
 
 def save_experience(experience, exp_dir, exp_tag):
-    np.save(f'C:/users/emily/ramsey/ramsey_2p_rigid_rules/experience/{exp_dir}/{exp_tag}_states', experience.states)
-    np.save(f'C:/users/emily/ramsey/ramsey_2p_rigid_rules/experience/{exp_dir}/{exp_tag}_visits', experience.visit_counts)
-    np.save(f'C:/users/emily/ramsey/ramsey_2p_rigid_rules/experience/{exp_dir}/{exp_tag}_rewards', experience.rewards)
+    np.save(f'{exp_dir}/{exp_tag}_states', experience.states)
+    np.save(f'{exp_dir}/{exp_tag}_visits', experience.visit_counts)
+    np.save(f'{exp_dir}/{exp_tag}_rewards', experience.rewards)
 
 def load_experience(h5file):
     return ZeroExperienceBuffer(
