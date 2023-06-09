@@ -349,7 +349,7 @@ class ZeroAgent(Agent):
             parent.add_child(move, new_node)
         return new_node
     
-    def train(self, experience, learning_rate, batch_size, model_ID):
+    def train(self, experience, learning_rate, batch_size, model_ID, model_dir):
         exp = shuffle_game_data(experience)
         num_examples = exp.states.shape[0]
         model_input = exp.states
@@ -369,7 +369,7 @@ class ZeroAgent(Agent):
         history = self.model.fit(x = model_input, 
                                  y = [action_target, value_target],
                        batch_size = batch_size)
-        self.model.save(f'C:/users/emily/ramsey/ramsey_2p_rigid_rules/models/{model_ID}')
+        self.model.save(f'{model_dir}/{model_ID}')
         self.model.summary()
         #input('[Enter]')
         
