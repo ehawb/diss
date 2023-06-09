@@ -44,7 +44,7 @@ pip install dill
 - For the modules listed below, more details for each module will be given in the next section.
 - To generate self play games, use the `self_play_configs` module.
 - To train the bot on self play data, use the `z_train` module.
-- To observe the bot playing some games, use the `bot_observations` module.
+- To observe the bot playing some games, use the `evaluate_progress` module.
 
 #### Workflow example
 Here is an example of how I used the code to train my agent to play the $r(3, 3; 5)$ game:
