@@ -7,6 +7,10 @@ import time
 
 model_save_dir = 'C:/users/emily/diss_repo/ramsey/models'
 
+encoder_name = 'k3_encoder'
+graph_order = 5
+clique_orders = (3, 3)
+
 player1 = '2023_06_09_002_512'
 p1_mcts_rounds = 250
 p1_mcts_temp = 0.4
@@ -17,11 +21,8 @@ p2_mcts_temp = 0.4
 
 first_move_random = True
 
-encoder_name = 'k3_encoder'
-graph_order = 5
-clique_orders = (3, 3)
-num_games = 10
 
+num_games = 10
 
 ################################################################################
 ################################################################################
