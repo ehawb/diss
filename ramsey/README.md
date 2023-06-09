@@ -69,7 +69,8 @@ Here is an example of how I used the code to train my agent to play the $r(3, 3;
     - `games_per_batch` is how many games a worker should play before saving data. All of this will be combined at the end, but it was just a sanity thing for me in case I decided to end self play early or something.
 - Run the module.
 - Open the `z_train` module. Define variables accordingly:
-    - `exp_location` is the directory where your experience is saved.
+    - `exp_location` is the directory where your experience is saved. This should be where the **combined** experience is saved.
+         - For example, `C:/users/emily/diss_repo/ramsey/experience/01Jun2023_1648_2000games/combined` 
     - `model_save_dir` is the directory where your model is saved. You could copy and paste this from the `z_init` module.
     - `model_save_name` is the name of the model that completed self play. This should be `initmodel_K5_3_3` from the previous step.
 
