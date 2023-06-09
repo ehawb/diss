@@ -7,8 +7,6 @@ import time
 
 model_save_dir = 'C:/users/emily/diss_repo/ramsey/models'
 
-first_move_random = True
-
 player1 = '2023_06_09_002_512'
 p1_mcts_rounds = 250
 p1_mcts_temp = 0.4
@@ -17,7 +15,7 @@ player2 = '2023_06_09_002_512'
 p2_mcts_rounds = 250
 p2_mcts_temp = 0.4
 
-headstart = None
+first_move_random = True
 
 encoder_name = 'k3_encoder'
 graph_order = 5
@@ -33,6 +31,7 @@ num_games = 10
 print_settings = None
 pause_settings = 'never'
 interactive = False
+headstart = None
 start = time.time()
 if player1 != 'random':
     player1 = (f'{model_save_dir}/{player1}', p1_mcts_rounds, p1_mcts_temp)
