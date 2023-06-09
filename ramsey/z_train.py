@@ -8,9 +8,9 @@ from botparts.encoders.experience import ZeroExperienceCollector, ZeroExperience
 from botparts.zero.agent_main import ZeroAgent
 from botparts.board import Board
 
-exp_location = 'C:/users/emily/ramsey/ramsey_2p_rigid_rules/experience/01feb2023_1620_2500games/combined'
+exp_location = 'C:/users/emily/diss_repo/ramsey/experience/27Jan2023_1007_2000games'
 model_save_dir = 'C:/users/emily/diss_repo/ramsey/models'
-model_name = '2023_02_01_002_512'
+model_name = 'initmodel_K5_3_3'
 
 batch_size = 512
 learning_rate = 0.002
