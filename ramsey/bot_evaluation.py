@@ -5,48 +5,35 @@ from multiprocessing import Process, Queue
 from utils.observations import evaluate
 
 """ How to use this module:
-    if player is a trained model, indicate the name of the model as a
-    string, and indicate how many MCTS rounds should be conducted and with
-    what temperature.
-    
-    to observe play with a random agent, set the player name as 'random' and 
-    you can just ignore the MCTS parameters.
-    
-    if you want to see the graph of every move printed, set print = 'all' 
-        (they won't be printed until the end, and it might take a while!')
-    if you want to see just the last graph printed, set print = 'end'
-    to see no graphs printed, set print = None
-    
-    pause settings: 'games' or 'moves'
-    
-    interactive: True or False
+See GitHub README
     """
 
-player1 = 'random'
+model_save_dir = 'C:/users/emily/diss_repo/ramsey/models'
+
+player1 = '2023_06_09_002_512'
 p1_mcts_rounds = 1000
 p1_mcts_temp = 0.0
 
-player2 = 'random'
+player2 = '2023_06_09_002_512'
 p2_mcts_rounds = 1000
 p2_mcts_temp = 0.0
 
+encoder_name = 'k3_encoder'
+graph_order = 5
+clique_orders = (3, 3)
 
-graph_order = 8
-clique_orders = (3, 4)
 
-
-num_workers = 6
+num_workers = 4
 games_per_worker = 2
 
 #%% leave this part alone
 if player1 != 'random':
-    player1 = (f'models/{player1}', p1_mcts_rounds, p1_mcts_temp)
+    player1 = (f'{model_save_dir}/{player1}', p1_mcts_rounds, p1_mcts_temp)
 if player2 != 'random':
-    player2 = (f'models/{player2}', p2_mcts_rounds, p2_mcts_temp)
+    player2 = (f'{model_save_dir}/{player2}', p2_mcts_rounds, p2_mcts_temp)
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(gpus[0], True)    
-encoder_name = '4_8_encoder'
 print_settings = 'end'
 pause_settings = 'never'
 interactive = False

@@ -4,9 +4,6 @@ import time
 """ How to use this module:
    see README on github 
     """
-# init: 'r33_k5_init'
-# V1: '2023_02_01_002_512'
-# V2: '2023_02_02_002_512'
 
 model_save_dir = 'C:/users/emily/diss_repo/ramsey/models'
 

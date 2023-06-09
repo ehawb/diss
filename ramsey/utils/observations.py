@@ -97,13 +97,13 @@ def observe(player1, player2,
     board = Board(nx.complete_graph(graph_order))
     encoder = Encoder.get_encoder_by_name(encoder_name, graph_order)
     if player1 == 'random':
-        player1 = RandomAgent(load_model('C:/users/emily/ramsey/ramsey_2p-main/models/k8_four_blocks_init/'), encoder)
+        player1 = RandomAgent(load_model(''), encoder)
     else:
         model, rounds, temp = player1
         p1_model = load_model(model)
         player1 = InteractiveZeroAgent(p1_model, encoder, rounds, temp) if interactive else ZeroAgent(p1_model, encoder, rounds, temp)
     if player2 == 'random':
-        player2 = RandomAgent(load_model('C:/users/emily/ramsey/ramsey_2p-main/models/k8_four_blocks_init/'), encoder)
+        player2 = RandomAgent(load_model(''), encoder)
     else:
         model, rounds, temp = player2
         p2_model = load_model(model)
@@ -134,7 +134,7 @@ def evaluate(q, player1, player2,
             print_settings, pause_settings, interactive,
             num_games):
     board = Board(nx.complete_graph(graph_order))
-    encoder = Encoder.get_encoder_by_name(encoder_name)
+    encoder = Encoder.get_encoder_by_name(encoder_name, graph_order)
     if player1 == 'random':
         player1 = RandomAgent()
     else:
