@@ -7,7 +7,6 @@ from botparts.encoders.base import Encoder
 from botparts.gametypes import Player
 from botparts.agent.random_agent import RandomAgent
 from botparts.zero.agent_main import ZeroAgent
-from botparts.zero.agent_interactive import InteractiveZeroAgent
 from botparts.board import GameState, Board
 from utils.simulations import end_game_eval, game_info
 from botparts.board_utils import print_board
@@ -101,13 +100,13 @@ def observe(player1, player2,
     else:
         model, rounds, temp = player1
         p1_model = load_model(model)
-        player1 = InteractiveZeroAgent(p1_model, encoder, rounds, temp) if interactive else ZeroAgent(p1_model, encoder, rounds, temp)
+        player1 = ZeroAgent(p1_model, encoder, rounds, temp)
     if player2 == 'random':
         player2 = RandomAgent(load_model(''), encoder)
     else:
         model, rounds, temp = player2
         p2_model = load_model(model)
-        player2 = InteractiveZeroAgent(p2_model, encoder, rounds, temp) if interactive else ZeroAgent(p2_model, encoder, rounds, temp)
+        player2 = ZeroAgent(p2_model, encoder, rounds, temp)
     total_moves = 0
     p1_lose = 0
     num_draws = 0
@@ -140,13 +139,13 @@ def evaluate(q, player1, player2,
     else:
         model, rounds, temp = player1
         p1_model = load_model(model)
-        player1 = InteractiveZeroAgent(p1_model, encoder, rounds, temp) if interactive else ZeroAgent(p1_model, encoder, rounds, temp)
+        player1 = ZeroAgent(p1_model, encoder, rounds, temp)
     if player2 == 'random':
         player2 = RandomAgent()
     else:
         model, rounds, temp = player2
         p2_model = load_model(model)
-        player2 = InteractiveZeroAgent(p2_model, encoder, rounds, temp) if interactive else ZeroAgent(p2_model, encoder, rounds, temp)
+        player2 = ZeroAgent(p2_model, encoder, rounds, temp)
     total_moves = 0
     p1_wins = 0
     for i in range(num_games):

@@ -42,8 +42,6 @@ class Move():
     
     @classmethod
     def play(cls, edge):
-        # if len(edge) == 3:
-        #     edge = (edge[0], edge[1])
         return Move(edge = edge)
     @classmethod
     def pass_turn():
@@ -115,7 +113,6 @@ class GameState:
     def apply_move(self, move, update = True):
         if move.is_play:
             player = self.player
-            # input(f'player type in apply move: {type(player)}')
             # get the colored edge
             colored_edge = move.edge
             # this is the color indicator:
@@ -156,21 +153,10 @@ class GameState:
                          blue_cliques = self.blue_cliques,
                          p1_edges = p1_edges,
                          p2_edges = p2_edges)
-        # print('just updated the game state in apply_move.')
-        # print(f"""    
-                  # next player: {self.player.other}
-                  # red cliques: {self.red_cliques}
-                  # blue cliques: {self.blue_cliques}
-                  
-               # """)
         updated_gamestate = updated_gamestate.update_monochromatic_subgraph(color)
         cliques = updated_gamestate.check_monochromatic_cliques(move, color)
-        # print(f'ran check cliques after {move} {color}, cliques: {cliques}')
-        # print('updating game state in apply move.')
         if update == True:
-            # print(f'updating the gamestate.')
             updated_gamestate = updated_gamestate.update_cliques(color, cliques)
-        # print(f'updated the game state after applying move {move}, red cliques: {updated_gamestate.red_cliques}; blue cliques: {updated_gamestate.blue_cliques}')
         return updated_gamestate
     
     def is_over(self):
@@ -178,7 +164,6 @@ class GameState:
         recent_move = self.last_move
         edges_remaining = self.legal_moves()
         if len(edges_remaining) == 0:
-            # print('no edges remaining.')
             return True
         if recent_move is None:
             return False
@@ -196,14 +181,12 @@ class GameState:
         except ValueError:
             largest_red_clique = ()
         if len(largest_red_clique) >= losing_red_clique:
-            # print(f'game over bc red clique: {largest_red_clique}')
             return True
         try:
             largest_blue_clique = max(blue_cliques, key = len)
         except ValueError:
             largest_blue_clique = ()
         if len(largest_blue_clique) >= losing_blue_clique:
-            # print('game over bc blue clique')
             return True
         else:
             self.update_monochromatic_subgraph('red')
@@ -216,7 +199,6 @@ class GameState:
         for (u, v, c) in graph.edges.data('color'):
             if c == color:
                 colored_edges.append((u, v))
-                # print(f'appending {color} {(u, v)}')
         subgraph = graph.edge_subgraph(colored_edges)
         if color == 'red':
             self.red_subgraph = subgraph
@@ -232,7 +214,6 @@ class GameState:
             else:
                 move = Move(move)
         if self.is_over():
-            # print('not a valid move bc the game is over.')
             return False
         if move.is_pass or move.is_resign:
             return True
@@ -266,7 +247,6 @@ class GameState:
             edge = move.edge
         edge = (edge[0], edge[1])
         u, v = edge
-        # print(f'checking cliques after coloring {edge} {color}')
         ### get the info we need for relevant color
         if color == 'red':
             max_k = self.red_clique_order
@@ -283,8 +263,7 @@ class GameState:
         if graph is None:
             #### then there definitely aren't any cliques.
             return cliques
-        # print(f'graph edges: {graph.edges()}')
-        # print(f'(u, v): ({u}, {v})')
+
         #### if the edge colored isn't in the monochromatic subgraph,    ## why was I even worried about this? is it necessary?
         if (u, v) not in graph.edges():
             #### no cliques formed.
@@ -294,59 +273,43 @@ class GameState:
         v_neighbors = list(graph.neighbors(v))
         common_neighbors = [vertex for vertex in u_neighbors 
                                 if vertex in v_neighbors]
-        # print(f'u neighbors: {u_neighbors}')
-        # print(f'v neighbors: {v_neighbors}')
         #### iterate through all of the different possible clique orders:
         #### k = 3 needs to be handled separately!
         for k in [3]:
             if (len(u_neighbors) < k-2) or (len(v_neighbors) < k-2):
                 break
             if len(common_neighbors) < k-2:
-                # print(f'not enough common neighbors.')
                 break
             ### if two vertices that have recently been connected by an edge
             ### share a common neighbor, then there is definitely a K3 formed.
             for neighbor in common_neighbors:
                 K3 = tuple(sorted((neighbor, u, v)))
                 cliques.append(K3)
-                # print(f'appended K3: {K3}')
         for k in range(4, max_k+1):
             #### (remember that max_k is the order of the monochromatic clique
             #### we're trying to avoid in the original problem)
-            # print(f'checking k = {k}')
-            # print(f'{u} neighbors: {u_neighbors}')
-            # print(f'{v} neighbors: {v_neighbors}')
             #### if there aren't enough neighbors, break
             if (len(u_neighbors) < k-2) or (len(v_neighbors) < k-2):
                 break
             ##### get a list of common neighbors shared between the edges
-            # print(f'neighbors {u} and {v} have in common:')
-            # print(f'common neighbors: {common_neighbors}')
             #### if there aren't enough common neighbors, break
             if len(common_neighbors) < k-2:
-                # print(f'not enough common neighbors.')
                 break
             vertex_subsets = list(itertools.combinations(common_neighbors, k-2))
             #### if an edge doesn't exist between two common neighbors,
             ##### we don't need to consider those neighbors
             common_neighbors_possible_edges = list(
                 itertools.combinations(common_neighbors, 2))
-            # print(f'common neighbors for {u} and {v}: {common_neighbors}')
-            # print(f'possible edges: {common_neighbors_possible_edges}')
             not_edges = [edge for edge in common_neighbors_possible_edges
                          if edge not in graph.edges()]
-            # print(f'not edges: {not_edges}')
             for edge in not_edges:
                 u1, v1 = edge
                 vertex_subsets = [subset for subset in vertex_subsets if not 
                                   ((u1 in subset) and (v1 in subset))]
-                # print(f'vertex_subsets: {vertex_subsets}')
                 vertex_subsets = [subset for subset in vertex_subsets if len(subset) > 1]
-                # print(f'vertex subsets: {vertex_subsets}')
             #### now we have a list of potential cliques.
             #### check if each tuple forms a clique
             for subset in vertex_subsets:
-                # print(f'checking {color} {subset} for clique.')
                 #### if we have prior cliques to work with,
                 if prior_cliques is not None:
                     #### check those first.
@@ -369,10 +332,8 @@ class GameState:
                 clique_vertices = list(subset)
                 edge_vertices = [u, v]
                 clique = tuple(sorted(clique_vertices + edge_vertices))
-                # print(f' adding {color} clique: {clique}')
                 # and add the clique to the list
                 cliques.append(clique)
-        # print(f'returning cliques: {cliques}')
         return cliques
     
     def update_cliques(self, color, cliques):
@@ -380,7 +341,6 @@ class GameState:
         Cliques is a list of tuples that represent monochromatic cliques in the graph."""
         if len(cliques) == 0:
             return self
-        # print(f'updating {color} cliques: {cliques}')
         board = self.board
         player = self.player
         previous_state = self.previous_state

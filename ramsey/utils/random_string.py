@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 10 13:21:18 2020
-
-@author: Emily Smith
-"""
-
 import random
 import string
 
