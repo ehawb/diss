@@ -3,7 +3,7 @@ from numpy import array
 from nx_to_tikz import edge_colored_graph, nx_to_tikz_colored_edges
 
 graph = nx.cycle_graph(5)
-save_dir = 'C:/users/emily smith/dissertation/figures/code_check'
+save_dir = 'C:/figures'
 graph_name = 'color_no_label'
 red_edges = [(0, 1), (1, 2)]
 blue_edges = [(1, 2), (2, 3)]
