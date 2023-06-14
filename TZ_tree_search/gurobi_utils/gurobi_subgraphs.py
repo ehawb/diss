@@ -39,7 +39,6 @@ def finish_check(G, H):
         print(f'n = {n}, m = {m}')
         for (u_i, u_j) in H.edges:
             for (v_r, v_s) in not_G_edges:
-                # print(f'Index check: {u_i, u_j, v_r, v_s}')
                 subg.addConstr(X[u_i, v_r] + X[u_j, v_s] <= 1, name = f'Edges {(u_i, u_j)}, {(v_r, v_s)} v1')
                 subg.addConstr(X[u_i, v_s] + X[u_j, v_r] <= 1, name = f'Edges {(u_i, u_j)}, {(v_r, v_s)} v2')
         # more edge weight constraints
@@ -197,7 +196,6 @@ def all_subgraph_check(G, H):
     total_maps = 0
     all_maps = []
     while subg.SolCount > 0:
-        # print('Looking for another solution...')
         mapping = get_restraints(G, H, subg.X)
         total_maps +=1
         pairs = []
@@ -240,7 +238,6 @@ def all_subgraph_check_plain(G, H):
             total_maps = 0
             all_maps = []
             while subg.SolCount > 0:
-                # print('Looking for another solution...')
                 mapping = get_restraints(G, H, subg.X)
                 total_maps +=1
                 pairs = []
@@ -252,8 +249,8 @@ def all_subgraph_check_plain(G, H):
                 all_maps.append(pairs)
                 subg.addConstr(sum((X[i, j]) for (i, j) in pairs) <= m-1, name = 'Eliminating previous solution {total_maps}')
                 subg.optimize()
-            # print(f'Found {total_maps} solutions in all.')            
     return all_maps         
+
 def silent_subgraph_check(G, H):
     n = G.order()
     print(f'G has order {n}')
