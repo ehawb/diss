@@ -1,7 +1,7 @@
 import networkx as nx
 from itertools import combinations
 
-def nx_to_tikz(graph, nx_layout = None, labeled = False):
+def nx_to_tikz(graph, nx_layout, save_loc):
     if nx_layout is None:
         nx_layout = nx.circular_layout(graph)
     edges = list(graph.edges)
@@ -28,9 +28,12 @@ def nx_to_tikz(graph, nx_layout = None, labeled = False):
                 }}
         \\end{{tikzpicture}}
         """
-    print(code)
+    with open(f'{save_loc}.tex', 'w') as f:
+        f.write(code)
+        f.close()
+    print(f'Saved TikZ code to {save_loc}.tex')
     
-def nx_to_tikz_with_labels(edges, nx_layout, label_dist = 0.1):
+def nx_to_tikz_with_labels(edges, nx_layout, save_loc, label_dist = 0.1):
     QI = ''
     QII = ''
     QIII = ''
@@ -43,17 +46,13 @@ def nx_to_tikz_with_labels(edges, nx_layout, label_dist = 0.1):
         if x >= 0:
             if y >= 0:
                 QI += f'{v}/{x}/{y},'
-                # input(f'vertex {v} in QI: {round(x, 5), round(y, 5)}')
             else:
                 QII += f'{v}/{x}/{y},'
-                # input(f'vertex {v} in QII {round(x, 5), round(y, 5)}')
         else:
             if y >= 0:
                 QIV += f'{v}/{x}/{y},'
-                # input(f'vertex {v} in QIII {round(x, 5), round(y, 5)}')
             else:
                 QIII += f'{v}/{x}/{y},'
-                # input(f'vertex {v} in QIV {round(x, 5), round(y, 5)}')
     edge_string = ''
     for edge in edges:
         u, v = edge
@@ -88,8 +87,10 @@ def nx_to_tikz_with_labels(edges, nx_layout, label_dist = 0.1):
                 }}
         \\end{{tikzpicture}}
         """
-
-    print(code)
+    with open(f'{save_loc}.tex', 'w') as f:
+        f.write(code)
+        f.close()
+    print(f'Saved TikZ code to {save_loc}.tex')
 
 def get_red_edges(graph):
     red = [(u, v) for (u, v) in graph.edges if graph[u][v]['color'] == 'red']
@@ -99,12 +100,10 @@ def get_blue_edges(graph):
     blue = [(u, v) for (u, v) in graph.edges if graph[u][v]['color'] == 'blue']
     return blue
 
-def nx_to_tikz_colored_edges(graph, nx_layout = None):
+def nx_to_tikz_colored_edges(graph, nx_layout, save_loc):
     red_edges = get_red_edges(graph)
     blue_edges = get_blue_edges(graph)
-    
-    if nx_layout is None:
-        nx_layout = nx.circular_layout(graph)
+
     v_string = ''
     for v in nx_layout:
         coords = nx_layout[v]
@@ -146,9 +145,12 @@ def nx_to_tikz_colored_edges(graph, nx_layout = None):
     {blue_code}
     {end}
     """
-    print(code)
+    with open(f'{save_loc}.tex', 'w') as f:
+        f.write(code)
+        f.close()
+    print(f'Saved TikZ code to {save_loc}.tex')
 
-def nx_to_tikz_colored_edges_with_labels(graph, nx_layout = None, label_dist = 0.01):
+def nx_to_tikz_colored_edges_with_labels(graph, nx_layout, save_loc, label_dist = 0.01):
     red_edges = get_red_edges(graph)
     blue_edges = get_blue_edges(graph)
     black_edges = [e for e in graph.edges if e not in red_edges + blue_edges]
@@ -156,8 +158,6 @@ def nx_to_tikz_colored_edges_with_labels(graph, nx_layout = None, label_dist = 0
     QII = ''
     QIII = ''
     QIV = ''
-    if nx_layout is None:
-        nx_layout = nx.circular_layout(graph)
     v_string = ''
     for v in nx_layout:
         coords = nx_layout[v]
@@ -177,7 +177,6 @@ def nx_to_tikz_colored_edges_with_labels(graph, nx_layout = None, label_dist = 0
             else:
                 QIII += f'{v}/{x}/{y},'
                 # input(f'vertex {v} in QIV {round(x, 5), round(y, 5)}')
-    # delete last comma
     # delete last comma
     v_string = v_string[:-1]
     QI = QI[:-1]
@@ -244,7 +243,10 @@ def nx_to_tikz_colored_edges_with_labels(graph, nx_layout = None, label_dist = 0
     {black_code}
     {end}
     """
-    print(code)
+    with open(f'{save_loc}.tex', 'w') as f:
+        f.write(code)
+        f.close()
+    print(f'Saved TikZ code to {save_loc}.tex')
     
 def edge_colored_graph(n, red_edges, blue_edges, black_edges = []):
     G = nx.Graph()
