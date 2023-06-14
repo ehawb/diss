@@ -14,11 +14,8 @@ def combine_files(exp_dir, address = None):
         directory = f'experience/{exp_dir}'
     os.mkdir(f'{directory}/combined')
     files = os.listdir(directory)
-    # print(files)
-    # input('[enter]')
     states = [file for file in files if 'states' in file]
     state_files = [f'{directory}/{state}' for state in states]
-    # input('[enter]')
     rewards = [file for file in files if 'rewards' in file]
     reward_files = [f'{directory}/{reward}' for reward in rewards]
     visits = [file for file in files if 'visits' in file]
@@ -36,5 +33,3 @@ def combine_files(exp_dir, address = None):
     np.save(f'{directory}/combined/combined_states.npy', combined_states)
     np.save(f'{directory}/combined/combined_rewards.npy', combined_rewards)
     np.save(f'{directory}/combined/combined_visits.npy', combined_visits)
-    
-combine_files('14Apr2021_0818_3600games')

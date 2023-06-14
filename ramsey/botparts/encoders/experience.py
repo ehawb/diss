@@ -4,8 +4,6 @@ class ZeroExperienceCollector:
     def __init__(self):
         self.states = []
         self.visit_counts = []
-        # self.symmetric_visits = [] # don't need this since all states, visits concatenated into one
-        # self.symmetric_visit_counts = [] # see above.
         self.rewards = []
         self._current_episode_states = []
         self._current_episode_visit_counts = []
@@ -15,8 +13,6 @@ class ZeroExperienceCollector:
     def reset(self):
         self.states = []
         self.visit_counts = []
-        # self.symmetric_visits = [] # don't need this since all states, visits concatenated into one
-        # self.symmetric_visit_counts = [] # see above.
         self.rewards = []
         self._current_episode_states = []
         self._current_episode_visit_counts = []
@@ -24,25 +20,14 @@ class ZeroExperienceCollector:
         self._current_episode_symmetric_visit_counts = []        
     
     def begin_episode(self):
-        # print('begin episode.')
         self._current_episode_states = []
         self._current_episode_visit_counts = []
     
-    def record_decision(self, state, visit_counts): #, symmetric_state, symmetric_visits, shifted_states = [], shifted_visits = []):
-        # print(f'recording state.')
-        # print(f'recording visit counts.')
+    def record_decision(self, state, visit_counts): 
         self._current_episode_states.append(state)
         self._current_episode_visit_counts.append(visit_counts)
-        #self._current_episode_symmetric_states.append(symmetric_state)
-        #self._current_episode_symmetric_visit_counts.append(symmetric_visits)
-        #for state in shifted_states:
-        #    self._current_episode_states.append(state)
-        #for visits in shifted_visits:
-        #    self._current_episode_visit_counts.append(visits)
-        # input(f'total visits in experience: {len(self._current_episode_visit_counts)}')
         
     def complete_episode(self, reward):
-        # print('episode completed.')
         num_states = len(self._current_episode_states)
         num_symmetric_states = len(self._current_episode_symmetric_states)
         self.states += self._current_episode_states
