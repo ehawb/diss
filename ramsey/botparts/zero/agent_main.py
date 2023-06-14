@@ -2,8 +2,8 @@ import numpy as np
 from copy import deepcopy, copy
 from tensorflow.keras.optimizers import SGD
 from botparts.agent.base import Agent
-from botparts.zero.agent_utils import get_indices, get_edges, get_priors
-from botparts.zero.agent_utils import host_edge_list, ends_game
+from botparts.zero.agent_utils import get_indices, get_priors
+from botparts.zero.agent_utils import host_edge_list
 from botparts.board import Move
 from random import choice
 from random import sample
@@ -183,12 +183,8 @@ class ZeroAgent(Agent):
                 # figure out if it's a win or a draw.
                 rc = child_node.state.red_cliques
                 bc = child_node.state.blue_cliques
-                #print(f'Assessing a terminal game state with move {next_move}...')
-                #print(f'Red cliques: {rc}')
-                #print(f'Blue cliques: {bc}')
                 if len(rc) == 0:
                     if len(bc) == 0:
-                        #print(f'Found a good ending, actually: {next_move}')
                         child_node.value = 0
                 else:
                     try:
@@ -250,18 +246,14 @@ class ZeroAgent(Agent):
             high_score_moves = []
             moves = list(node.moves())
             if random:
-                #print(f'Returning a random branch.')
                 high_score_branch = choice(moves)
                 return high_score_branch
-            #print(f'{len(moves)} moves available')
             high_score = max([score_branch(move) for move in moves])
-            #print(f'High score of {high_score}')
             for move in moves:
                 if score_branch(move) == high_score:
                     high_score_moves.append(move)
             try:
                 high_score_branch = choice(high_score_moves)
-                #print('SELECTING ACTUAL HIGH SCORE BRANCH...')
             except IndexError:
                 print('Making a random selection...')
                 high_score_branch = choice(moves)
@@ -271,31 +263,14 @@ class ZeroAgent(Agent):
     
     def collect_info(self, game_state, root):    
         root_state_tensor = self.encoder.encode(game_state)
-        #print(f'Tensor: \n {root_state_tensor}')
-        #symmetric_root_tensor = self.encoder.symmetric_encoding(game_state)
+
         visit_counts = np.array([
             root.recent_visits(
                 self.encoder.decode_edge_index(index, game_state))
             for index in range(self.encoder.num_points())
             ])
-        #num_edges = len(game_state.board.edges)
-        #symmetric_visit_shift = int(num_edges)
-        #symmetric_visit_counts = np.roll(visit_counts, symmetric_visit_shift)
-       # n = game_state.board.graph.order()
-       # shifted_states = []
-       # shifted_visits = []
-        # augment the data set:
-      #  shifts = range(1, n)
-        # get shifted states
-        #for shift in shifts:
-            #shifted_state = self.encoder.relabeled_encoding(game_state, shift)
-            # get shifted visits
-            #shifted_visit = self.shift_visit_counts(visit_counts, shift, n, game_state)
-            #shifted_states.append(shifted_state)
-            #shifted_visits.append(shifted_visit)
         self.collector.record_decision(
             root_state_tensor, visit_counts)#,
-            #symmetric_root_tensor, symmetric_visit_counts, shifted_states, shifted_visits)    
     
     def shift_visit_counts(self, visits, shift, n, game_state):
         visit_counts = visits
@@ -370,9 +345,7 @@ class ZeroAgent(Agent):
                                  y = [action_target, value_target],
                        batch_size = batch_size)
         self.model.save(f'{model_dir}/{model_ID}')
-        self.model.summary()
-        #input('[Enter]')
-        
+        self.model.summary()        
         print(f'This model was saved as {model_ID}')
         print(f'Learning rate: {learning_rate}')
         print(f'Batch size: {batch_size}')
