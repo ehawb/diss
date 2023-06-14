@@ -5,7 +5,7 @@ from cayley_utils.nx_to_GAP import graph_to_GAP
 G = nx.cycle_graph(5)
 
 ### the code will save a GAP script. give a directory and a graph name here
-save_dir = 'E:/gap_scripts'
+save_dir = 'D:/gap_scripts'
 graph_name = 'C5'
 
 ###############################################################################
