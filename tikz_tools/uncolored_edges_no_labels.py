@@ -3,7 +3,7 @@ from numpy import array
 from nx_to_tikz import nx_to_tikz
 
 graph = nx.cycle_graph(5)
-save_dir = 'C:/users/emily smith/dissertation/figures/code_check'
+save_dir = 'C:/figures'
 graph_name = 'no_color_no_label'
 
 # use a NetworkX layout,
