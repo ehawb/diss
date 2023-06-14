@@ -3,7 +3,7 @@ import networkx as nx
 import logging
 
 speed_trial_name = 'order_5' # give your trial a quick name for logging purposes
-where_to_log = 'E:' # where to save logging info (so you can keep tabs on the search if you'd like)
+where_to_log = 'E:/speedrunresults' # where to save logging info (to view results)
 
 graphs = nx.read_graph6('C:/users/emily/dissertation/code/data/mckay/graph5.g6') # read in a list of graphs
 order_limit = 20
