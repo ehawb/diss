@@ -1,9 +1,10 @@
-from tree_search_utils.tree_searcher import do_tree_search
 import networkx as nx
 import logging
 from datetime import date
+from tree_search_utils.tree_searcher import resume_tree_search
 
 save_folder = 'E:/tree_search'
+resume_data = 'E:/tree_search/01Jun2023_095907_C_5_BFS.pickle'
 
 ### put the graph6 specification inside the ''
 #link_graph = nx.from_graph6_bytes(b'GsOiho') 
@@ -35,12 +36,12 @@ format = '%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
 datefmt='%H:%M:%S',
 level=logging.DEBUG)
 
-test, edges = do_tree_search(
-        link_graph = link_graph,
+resume_tree_search(
+        link_graph_name, 
         save_folder = save_folder,
-        link_graph_name = link_graph_name,
-        search_mode = search_mode,
-        pickle_freq = pickle_freq,
-        max_children = max_children,
-        max_graph_order = max_graph_order
-    )
+        data = resume_data, 
+        search_mode = search_mode, 
+        pickle_freq = pickle_freq, 
+        max_children = 1000, 
+        max_graph_order = max_graph_order, 
+        max_nodes = 1_000_000)
