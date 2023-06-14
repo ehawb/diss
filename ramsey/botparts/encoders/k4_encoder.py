@@ -50,7 +50,6 @@ class K4Encoder(Encoder):
             red_cliques_edges += edges
         for red_edge in red_edges:
             if red_edge not in red_cliques_edges:
-                # print(f'red edge {red_edge} not in red cliques edges: {red_cliques_edges}')
                 red_cliques.append(red_edge)
         blue_edges = list(game_state.blue_subgraph.edges)
         blue_cliques = game_state.blue_cliques
@@ -60,7 +59,6 @@ class K4Encoder(Encoder):
             blue_cliques_edges += edges
         for blue_edge in blue_edges:
             if blue_edge not in blue_cliques_edges:
-                # print(f'blue edge {blue_edge} not in blue cliques edges: {blue_cliques_edges}')
                 blue_cliques.append(blue_edge)        
         for clique in red_cliques:
             clique_order = len(clique)
@@ -160,7 +158,6 @@ class K4Encoder(Encoder):
         return board_tensor
     
     def encode_move(self, move, game_state):
-        # print(f'encoding move. move: {move} type: {type(move)}')
         colored_edges = game_state.colored_edge_list
         color_ind = move[2]
         # if the edge is blue,
@@ -173,11 +170,8 @@ class K4Encoder(Encoder):
         return index
     
     def decode_edge_index(self, index, game_state):
-        # print(f'decoding index {index}')
         colored_edges = game_state.colored_edge_list
-        # print(f'colored edge list: {colored_edges}')
         edge = colored_edges[index]
-        # print(f'found {edge}')
         return edge
     
     def num_points(self):
