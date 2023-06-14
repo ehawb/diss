@@ -140,7 +140,6 @@ def resume_tree_search(link_graph_name, save_folder,
             if len(next_node.children) > max_children:
                 next_node = Node(next_node.local_graph, next_node.children[:max_children], 'CT')
             num_children = len(next_node.children)
-            # print(f'After expansion, need to add {num_children} children.')
             if search_mode == 'BFS':
                 # new children at end of queue
                 queue = queue + next_node.children
@@ -180,8 +179,6 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
     next_ID = 1
     while len(queue) > 0:
         logging.debug(f'      Looking at another node. {len(queue)} nodes in the queue. {time.time() - start} seconds elapsed.')
-        # print(f'===== Moving on in the queue {i}, {num_good} good finishes so far...........................')
-        # print(f'    Time elapsed: {elapsed}')
         if time.time() - start > time_limit:
             logging.info(f'[T] {link_graph_name}  ({time_limit} s) | g6: {print_graph6(link_graph)} || explored {len(finished_nodes)} nodes')
             realizable = False
@@ -190,7 +187,6 @@ def do_tree_check(link_graph, link_graph_name, search_mode, max_children = 1000,
         logging.debug(f'          Node has {len(next_node.children)} children initially.')
         next_node.reset_children()
         logging.debug(f'          Node has {len(next_node.children)} children now.')
-        # print(f'       Next node: {next_node}')
         if next_node.status in ['TB', 'TL', 'CI', 'D']:
             finished_nodes.append(next_node)
             i+=1

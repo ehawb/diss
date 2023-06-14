@@ -17,7 +17,6 @@ def get_nodes_with_neighborhood(graph, neighborhood):
     return nodes
 
 def powerset(iterable):
-    "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
     s = list(iterable)
     return chain.from_iterable(combinations(s, r) for r in range(1, len(s)+1))
 
@@ -29,24 +28,18 @@ def graph_in_scriptB(graph, scriptB):
 
 def get_terms(link_graph, k, scriptB):
     vertices = [n for n, d in link_graph.degree() if d == k]
-    # print(f'Vertices of degree {k}: {vertices}')
     low, high = link_graph.order(), 0
     for v in vertices:
         neighbors = list(link_graph.neighbors(v))
-        # print(f'Looking at neighbors of {v}: {neighbors}')
         num_good = 0
         for u in neighbors:
             neighbor_link = link_graph.subgraph(list(link_graph.neighbors(u)))
             if graph_in_scriptB(neighbor_link, scriptB):
-                # print(f'Vertex {u} has a good neighborhood.')
                 num_good +=1
         if num_good < low:
-            # print(f'Replacing previous min value of {low} with {num_good}')
             low = num_good
         if num_good > high:
-            # print(f'Replacing previous max value of {high} with {num_good}')
             high = num_good
-    # print(f'    Returning low of {low} and high of {high}')
     return low, high
 
 def check_scriptB(link_graph, scriptB):
@@ -63,12 +56,9 @@ def thm_one_gen(link_graph, quick = False):
     link_nbds = list(count_neighborhoods(link_graph).keys())
     subsets = list(powerset(link_nbds))
     link_nbd_graphs = graph_neighborhoods(link_graph)
-        # print(f'The link graph has {len(link_nbds)} neighborhoods.')
     for k in possible_k:
-        # print(f'k = {k} ------------------------')
         for scriptB in subsets:
             min_, max_ = get_terms(link_graph, k, scriptB)
-            # print(f'Got min of {min_} max {max_}')
             if k < min_ + max_:
                 if not check_scriptB(link_graph, scriptB):
                     strings = [graph6_string(B) for B in scriptB]

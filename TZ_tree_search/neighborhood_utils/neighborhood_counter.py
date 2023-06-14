@@ -5,7 +5,6 @@ def count_neighborhoods(graph):
     i = 0
     for n in graph.nodes():
         i+=1
-        # print(f"========= Checking node {n}, {i}/{len(graph.nodes())} ==========")
         neighbors = list(graph.neighbors(n))
         link = graph.subgraph(neighbors)
         if len(neighborhoods) == 0:
@@ -15,10 +14,8 @@ def count_neighborhoods(graph):
         result = is_new_neighborhood(link, neighborhoods)
         new = result[0]
         if new:
-            # print('Found a new one!')
             neighborhoods[link] = 1
         else:
-            # print('Already isomorphic to one in the list.')
             N = result[1]
             neighborhoods[N] += 1
     return neighborhoods

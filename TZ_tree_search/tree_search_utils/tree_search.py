@@ -11,12 +11,9 @@ def get_max_degree_node(graph, nodes):
     max_degree = 0
     max_node = nodes[0] # get a default return
     for n, degree in degrees:
-        # print(f'      Node {n} has degree {degree}')
         if degree > max_degree:
             max_degree = degree
-            # print(f'          Node {n} has the new max degree of {degree}')
             max_node = n
-    # print(f'         Returning max node {max_node}')
     return max_node
 
 class Node():
@@ -42,8 +39,8 @@ class Node():
         node_desc = f"""
         ID: {self.ID}
         A node that has {len(self.children)} children and status {self.status}.
-        The graph's order: {(self.local_graph.graph.order())}; {len(self.local_graph.finished_nodes_)}
-        finished nodes: {self.local_graph.finished_nodes_}.
+            The graph's order: {(self.local_graph.graph.order())}; 
+            {len(self.local_graph.finished_nodes_)} finished vertices: {self.local_graph.finished_nodes_}.
         """
         return node_desc
 
@@ -104,7 +101,6 @@ class Node():
                 check_graph = new_children[j]
                 if nx.is_isomorphic(check_graph.local_graph.graph, next_graph.local_graph.graph):
                     add = False
-                    # print(f'Child {i} found isomorphic to {j}')
             if add:
                 add_children.append(next_graph)
         self.children += add_children
@@ -128,8 +124,6 @@ class Node():
         return good
 
     def get_children(self, node, max_graph_order, max_children = 1000, time_limit = False):
-        # print(f'Getting children for expanding vertex: {node}')
-        # print(f'Curent graph edges: \n {self.local_graph.graph.edges}')
         if time_limit:
             start = time.time()
         children = []
@@ -158,6 +152,5 @@ class Node():
                 num_checked +=1 
                 if len(children) > max_children:
                     return children
-        # print(f'Returning {len(children)} children with IDS {[node.ID for node in children]}')
         return children
 
