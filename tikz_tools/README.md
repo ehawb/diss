@@ -6,9 +6,12 @@ You will need the following defined in the preamble of your document.
 \tikzstyle{vertex}=[draw,circle,fill=black,text=white,inner sep=2pt]
 \tikzstyle{vlab}=[shape=rectangle,fill=none,draw=none]
 ```
-## TikZ code for graphs with uncolored edges
 
-## TikZ code for graphs with colored edges
+There are four modules to choose from:
+- `uncolored_edges_no_labels` writes TikZ code for a graph with uncolored edges and unlabeled vertices
+- `uncolored_edges_with_labels` writes TikZ code for a graph with uncolored edges and labeled vertices
+- `colored_edges_no_labels` writes TikZ code for a graph with colored edges (right now, up to 2 colors, red and blue) and unlabeled vertices
+- `colored_edges_with_labels` writes TikZ code for a graph with uncolored edges (right now, up to 2 colors, red and blue) and labeled vertices
 
 # Virtual environment
 ```
