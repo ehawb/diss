@@ -13,6 +13,13 @@ There are four modules to choose from:
 - `colored_edges_no_labels` writes TikZ code for a graph with colored edges (right now, up to 2 colors, red and blue) and unlabeled vertices
 - `colored_edges_with_labels` writes TikZ code for a graph with uncolored edges (right now, up to 2 colors, red and blue) and labeled vertices
 
+The modules each work in similar ways. You'll need the following:
+- `graph` should be a NetworkX graph object, whether you create it yourself or load a built-in graph.
+- `save_dir` is a directory where the TikZ code will be saved.
+- `graph_name` should be a simple name for the graph. This will also be the name of the TikZ file saved in the aforementioned directory.
+- If working with a colored graph, specify the red and blue edges.
+- If working with a labeled graph, specify how from the vertices the labels should be.
+
 # Virtual environment
 ```
 Package    Version
