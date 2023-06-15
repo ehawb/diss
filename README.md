@@ -22,4 +22,8 @@ The code for this chapter is in the `TZ_tree_search` folder. There is a separate
 No code for this chapter.
 
 ## Chapter 6: Cayley graphs
+=======
+The code for this chapter is in the `cayley` folder. There is a separate README there with instructions for how to use the code.
 
+## Chapter 7: Conclusions
+No code for this chapter.

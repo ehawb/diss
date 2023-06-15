@@ -1,0 +1,5 @@
+Read("D:/gap_scripts/C5.txt");
+LoadPackage("grape");
+Print("The automorphism group is SmallGroup ", IdGroup(G), "\n");
+H := Filtered(AllSubgroups(G), i -> Order(i) = 5);
+Print("The automorphism group has ", Length(H), " subgroups of order 5.");
