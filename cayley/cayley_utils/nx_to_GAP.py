@@ -1,7 +1,7 @@
 import networkx as nx 
 
 def matrix_to_string(adj_matrix):
-    adj_string = 'A := ['
+    adj_string = 'LoadPackage("grape"); \n A := ['
     num_rows, num_columns = adj_matrix.shape
     for i in range(num_rows):
         row = str(adj_matrix[i])

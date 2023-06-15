@@ -1,0 +1,7 @@
+isomorphic_subgroup_image := function(G, G_prime)
+local phi, group_elt;
+phi := IsomorphicSubgroups(G, G_prime)[1];
+for group_elt in Elements(G_prime) do;
+Print(group_elt, " --> ", Image(phi, group_elt), "\n"); od;
+return;
+end;

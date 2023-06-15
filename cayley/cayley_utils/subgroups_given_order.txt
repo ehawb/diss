@@ -1,0 +1,3 @@
+subgroups_order_k := function(G, k);
+return Filtered(AllSubgroups(G), i -> Order(i) = k);
+end;
