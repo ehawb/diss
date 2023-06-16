@@ -1,4 +1,3 @@
-# dissertation_public
 # About this repository
 My name is Emily Hawboldt. This GitHub repository contains code to accompany my dissertation, "A machine learning approach to constructing Ramsey graphs leads to the Trahtenbrot-Zykov problem." My dissertation will be available at this webpage:
 https://ir.library.louisville.edu/math_etd/ 
