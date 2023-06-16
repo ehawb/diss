@@ -1,6 +1,11 @@
 Full disclaimer: This will be the hardest part of my code for me to try and explain since I don't have nearly as much experience with GAP as Python. I did learn a decent amount for this part of the project, but it felt more like me being in "survival" mode in GAP rather than "creative" mode... If you try to work through any of this stuff and you feel confused/stuck, please reach out to me and I will do my best to help. My email address is on my GitHub profile. This code is ultimately here because I'd like to help people learn how to do this stuff, so I will be glad to answer questions and possibly improve my code/explanation here in the process.
 
-# Working with graphs in GAP
+### Table of Contents
+**[Working with graphs in GAP](#graphs-gap)**<br>
+**[Is my graph potentially a Cayley graph?](#cayley)**<br>
+**[Fully worked example: $C_5$ is a Cayley graph](#example)**<br>
+
+# Working with graphs in GAP <a name="graphs-gap"></a>
 GAP (Groups, Algorithms, and Programming) is software I used to work with groups. Here is a link to the GAP website: https://www.gap-system.org/
 
 I usually work with GAP by writing code in a .txt file in a basic text editor. My usual choices are either the regular Notepad app on Windows, or Notepad++ (https://notepad-plus-plus.org/downloads/). I started out working with GAP just through the GAP console, but I abandoned this approach fairly quickly because it was really frustrating whenever I made mistakes. That being said, folks who prefer that method could just manually enter the commands from the .txt files if they truly want to work within the GAP console for some reason. On the other hand, sometimes my instructions here say to open GAP and enter some commands; you could write those commands in a .txt file that you then read in from GAP.
@@ -39,7 +44,7 @@ The output will be something like $[n, q]$, where $n$ is the order of the group,
 
 At that website, you can type $n, q$ in the upper left search bar to pull up the group.
 
-## Is my graph potentially a Cayley graph?
+# Is my graph potentially a Cayley graph? <a name="cayley"></a>
 Now that you've explored your graph and its automorphism group, suppose you're wondering if the graph is a Cayley graph. Let $\Gamma$ be the graph, and let $G$ be the automorphism group of the graph, i.e. $G = \text{Aut}(\Gamma)$. To determine whether $\Gamma$ is a Cayley graph, the first question is whether $G$ has a subgroup of order $\lvert \Gamma \rvert$.
 
 Use GAP to read the `subgroups_given_order.txt` file from the `cayley_utils` folder in this repo. You could also copy and paste the file somewhere that it's easier to access. It has a function called `subgroups_order_k` that takes a group $G$ and an integer $k$ as input, then returns all subgroups of order $k$ in $G$. So in the above context, after running 
@@ -54,7 +59,7 @@ where $k = \lvert \Gamma \rvert$.
 
 If it returns a list of groups, your graph is *potentially* a Cayley graph. If it returns an empty list, your graph is definitely not a Cayley graph.
 
-# Fully worked example: $C_5$ is a Cayley graph
+# Fully worked example: $C_5$ is a Cayley graph <a name="example"></a>
 This section shows how to verify that a given graph is indeed a Cayley graph by using $C_5$ as a (hopefully) straightforward example. If you're working through this and face any difficulties, please let me know, because I would be glad to try and improve it.
 
 1. Open the `nx_to_GAP.py` module.
