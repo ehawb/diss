@@ -1,8 +1,13 @@
 
 # How to use the code
-## The non-existence theorems
+## Table of Contents
+**[The non-existence theorems](#nonexist)**<br>
+**[Graph realization construction via tree search](#constructions)**<br>
+**[Realization speedruns](#speed)**<br>
+
+## The non-existence theorems<a name="nonexist"></a>
 If you are interested in whether a graph might be ruled out as a potential link graph, you will want to use the `nonexist_thms.py` module on the main page. Just modify it to use the theorem you are interested in.
-## Graph realization construction via tree search
+## Graph realization construction via tree search<a name="constructions"></a>
 - Use the `tree_search_setup.py` module on the main page. Comments are there to help you get it set up.
 - If your computer stops in the middle of a search for some reason (or if you need to pause the search and resume it later), there is a `resume_tree_search.py` module.
 - Once the tree search terminates, it will print where the data is saved. Copy this to paste in the next module:
@@ -13,7 +18,7 @@ If you are interested in whether a graph might be ruled out as a potential link 
     - `'TL'` (terminal, large) will give information about graphs that exceeded the maximum order of a realization allowed by the search.
 - Just comment out `large` and `bad` if you don't care about them. :)
 - If you're curious about what the actual search tree looks like, open the `draw_tree.py` module and paste the data path in. 
-## Realization speedruns
+## Realization speedruns<a name="speed"></a>
 - The `speedrun.py` module lets you run quick speed trials to find realizations of graphs.
 - Load a list of graphs you'd like to run speed trials on. This can be a list of graph6 codes in some .txt file that NetworkX can read in as graph6 codes.
 - Set an order limit on the realizations. The speed trials run on a depth-first search.
@@ -40,7 +45,8 @@ Theorem B is Theorem 15 in my dissertation. Theorem BC is Theorem 16 in my disse
 All the bones for our realization construction program are here. I'm not sure it's important to know what all of the little pieces are, so I'm ok treating it as a sort of black box for now. Contact me if you have questions.
 
 
-# Virtual environment
+# Virtual environment<a name="venv"></a>
+This list is also in the `requirements.txt` file.
 ```
 Package              Version
 -------------------- -----------
