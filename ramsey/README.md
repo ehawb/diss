@@ -1,19 +1,10 @@
-# ramsey_2p
-2-player Ramsey game
-
-## Table of Contents
-**[Game description](#game-description)**<br>
-**[Goals for this project](#goals-for-this-project)**<br>
-**[Some ideas for improvement](#some-ideas-for-improvement)**<br>
-**[How to use the bot](#how-to-use-the-bot)**<br>
-
-## Game description
+### Game description
 This is a 2-player version of the $r(k, l; n)$ game from my dissertation. 
 
-## Goals for this project
+### Goals for this project
 It would be great if the bot could learn to play the $r(4, 4; 17)$ game well. My dissertation describes the challenges faced in that regard. The bot *did* learn to play the $r(3, 3; 5)$ game, and that data is included in my dissertation.
 
-## Some ideas for improvement
+### Some ideas for improvement
 My dissertation includes recommendations for continuing the project.
 
 ## How to use the bot
