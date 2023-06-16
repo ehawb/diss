@@ -1,4 +1,8 @@
-# How to use the code
+### Table of Contents
+**[How to use the code](#how)**<br>
+**[Virtual environment](#venv)**<br>
+
+# How to use the code <a name="how"></a>
 This is code I used to generate some of the figures in my dissertation. This approach relies on taking a NetworkX graph object and a layout for it. A "layout" is just a Python dictionary that has coordinates for where each vertex should go. NetworkX has some built-in layouts (e.g. circular layout, spring embedding, etc), or you can provide your own layout for vertices.
 
 You will need the following defined in the preamble of your document.
@@ -20,7 +24,8 @@ The modules each work in similar ways. You'll need the following:
 - If working with a colored graph, specify the red and blue edges.
 - If working with a labeled graph, specify how from the vertices the labels should be.
 
-# Virtual environment
+# Virtual environment<a name="venv"></a>
+These are also in the `requirements.txt` file.
 ```
 Package    Version
 ---------- -------
