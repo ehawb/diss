@@ -4,10 +4,8 @@
 ## Table of Contents
 **[Game description](#game-description)**<br>
 **[Goals for this project](#goals-for-this-project)**<br>
-**[Current work](#current-work)**<br>
 **[Some ideas for improvement](#some-ideas-for-improvement)**<br>
 **[How to use the bot](#how-to-use-the-bot)**<br>
-**[Descriptions of some key modules](#descriptions-of-some-key-modules)**<br>
 
 ## Game description
 This is a 2-player version of the $r(k, l; n)$ game from my dissertation. 
@@ -21,8 +19,8 @@ My dissertation includes recommendations for continuing the project.
 ## How to use the bot
 ### Table of Contents
 **[Setting up the virtual environment](#setting-up-the-virtual-environment)**<br>
-**[Getting the bot on your computer](#getting-the-bot-on-your-computer)**<br>
 **[Using the code](#using-the-code)**<br>
+**[Workflow example](#workflow-example)**<br>
 
 ### Setting up the virtual environment
 I have not had success using `.yml` files to work, so I just give a list of the commands I used to install the required packages here. Packages where I used specific versions will come with those version numbers; while updated versions of packages might do the job, I haven't yet experimented with that. These instructions are current as of June 2023.
