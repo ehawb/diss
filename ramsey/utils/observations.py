@@ -66,6 +66,7 @@ def new_game_sim(board, clique_orders, player1, player2,
         if i == 1:
             if first_move_random:
                 move, node = agents[game.player].select_move(node, random = True)
+                print(f'Selecting a random move.')
             else:
                 move, node = agents[game.player].select_move(node)
         else:
